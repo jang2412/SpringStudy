@@ -2,11 +2,22 @@ package study.vo;
 
 //	DTO, VO, JavaBean, domain, model
 public class MemberVO {
+	
 	private String name;
 	private String birth;
 	private String[] hobby;	//	여러개??
 	private String gender;
 	private String address;
+	
+	public MemberVO() {
+	}
+	
+	public MemberVO(String name, String birth, String gender) {
+		super();
+		this.name = name;
+		this.birth = birth;
+		this.gender = gender;
+	}
 	
 	//	getter/setter
 	public String getName() {
