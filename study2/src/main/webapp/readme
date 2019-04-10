@@ -1,0 +1,9 @@
+//기본 팩키지 구조/메서드 규칙
+	//kr.ac.pcu.admin.web : 컨트롤러, vo(java bean, dto 등등)
+		AdminMemberController
+kr.ac.pcu.admin.service : 서비스
+		AdminMemberService <-- AdminMemberServiceImpl
+kr.ac.pcu.admin.dao : MemberDao or MemberMapper(MyBatis, iBatis)
+
+Dao 메서드 : selectXXX, insertXXX, ...
+service 메서드 : getXXX, getXXXList, registXXX

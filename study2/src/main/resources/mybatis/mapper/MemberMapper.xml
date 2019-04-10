@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 해당 DAO(인터페이스) 완전한 이름으로 네임스페이스 설정 -->
+<mapper namespace="kr.ac.pcu.admin.dao.MemberMapper">
+
+	<select id="selectMemberList"
+			resultType="kr.ac.pcu.admin.web.Member">
+			SELECT * 
+			  FROM tb_member 
+			 ORDER by reg_date DESC
+	</select>
+	
+	<!-- 파라미터가 기본형 마음대로 이름 기술 -->
+	<select id="selectMember"
+			parameterType="String"
+			resultType="kr.ac.pcu.admin.web.Member">
+			SELECT * 
+			  FROM tb_member 
+			 WHERE id = #{id} 
+	</select>
+	
+	<insert id="insertMember"
+			parameterType="kr.ac.pcu.admin.web.Member">
+			INSERT INTO tb_member   
+				      (id, name, point, birth, tel, address, locale_cd, reg_date) 
+    		VALUES (#{id}, #{name}, 0, #{birth}, #{tel}, #{address}, #{localeCd}, NOW()) 
+	
+	</insert>
+	
+	<update id="updateMember"
+			parameterType="kr.ac.pcu.admin.web.Member">
+			UPDATE tb_member
+			SET NAME = #{name},
+			birth = #{birth},
+			tel = #{tel},
+			address = #{address},
+			locale_cd = #{localeCd}
+			WHERE id = #{id}
+			
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

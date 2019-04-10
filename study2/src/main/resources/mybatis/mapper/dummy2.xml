@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- board.xml -->
+<!-- namespace 속성은 해당  인터페이스명(DAO) 기술, 또는 짧게 주셔도 문제없음  -->
+<mapper namespace="kr.saeil.board.dao.IBoardDao">
+	<!-- id : 인터페이스 메서드이름과 동일하게 
+			 parameterType : 구문생성을 위해 필요한 객체 
+			 resultType : 조회된 정보를 담을 객체 
+			 파라미터 정보(?) : #{이름}  , 이름 : 프리미트형 : 임의로작성 
+			                                                           객체 : 프로퍼팅명 작성  
+		1.	동적구문을 작성하실때 기존 클래스를 직접 호출하고자 하시는 경우
+			 StringUtils.isNotBlank() 
+			 = @org.apache.commons.lang3.StringUtils@isNotBlank()     
+			 
+		2. update, delete 구문작성시 
+		   WHERE 절이 꼭 나오는지 확인 필요 	, WHERE 절이 없다면 모두 변경이 됩니다.  
+	 -->	 
+	 <!-- <if test='search_word != null and search_word != "" '> -->
+	<sql id="whereClause">
+		<where>
+			<if test='@org.apache.commons.lang3.StringUtils@isNotBlank(search_word)'>
+				${search_type} LIKE '%' || #{search_word} || '%'
+			</if>
+		</where>
+	</sql>
+	 
+	<select id="getBoardCount" 
+	        parameterType="kr.saeil.board.vo.BoardSearchVO"
+	        resultType="int" >
+		SELECT COUNT(*) FROM board
+		<include refid="whereClause" />
+	</select>
+	
+	<select id="getBoardList" 
+	        parameterType="kr.saeil.board.vo.BoardSearchVO" 
+	        resultType="kr.saeil.board.vo.BoardVO"  >
+		<include refid="common.prePaging" />	        
+		SELECT bo_id
+         , bo_contents 
+         , bo_writer
+         , bo_cnt   
+         , TO_CHAR(bo_reg_date, 'YYYY/MM/DD') AS bo_reg_date  
+         , (SELECT COUNT(*) FROM reply b WHERE b.bo_id = board.bo_id) AS  re_cnt
+      FROM board   
+      <include refid="whereClause" />            
+     ORDER BY bo_id DESC
+    <include refid="common.postPaging" />              
+	</select>
+	
+	<select id="getBoard"
+	        parameterType="int" 
+	        resultType="kr.saeil.board.vo.BoardVO"   >
+			SELECT              
+			       bo_id        
+			     , bo_writer    
+			     , bo_contents  
+			     , bo_cnt       
+			     , TO_CHAR(bo_reg_date,'YYYY/MM/DD') bo_reg_date 
+			     , TO_CHAR(bo_mod_date,'YYYY/MM/DD') bo_mod_date
+			  FROM board 
+			 WHERE bo_id = #{dong} 	
+	</select>
+	
+	<update id="updateBoard" 
+				  parameterType="kr.saeil.board.vo.BoardVO" >
+			UPDATE board   
+			   SET bo_writer   = #{bo_writer}   
+			     , bo_contents = #{bo_contents} 
+			     , bo_mod_date = SYSDATE 
+			 WHERE bo_id = #{bo_id} 
+	</update>
+	
+	<insert id="insertBoard" 
+	        parameterType="kr.saeil.board.vo.BoardVO"  >
+	<selectKey keyProperty="bo_id" resultType="int" order="BEFORE">
+		SELECT BO_SEQ.NEXTVAL FROM DUAL
+	</selectKey>	        
+		INSERT INTO board 
+		       (bo_id,  bo_writer, bo_contents ,
+		        bo_cnt, bo_reg_date, bo_mod_date)
+		VALUES (#{bo_id} , #{bo_writer} , #{bo_contents}, 
+		        0,          SYSDATE,       SYSDATE )
+	</insert>
+	
+	<delete id="checkedDeleteBoard" parameterType="int[]" >
+		DELETE FROM board
+		WHERE
+		<choose>
+			<when test="array == null or array.length  == 0   ">
+				 1 = 0 
+			</when>
+			<otherwise>
+			 <foreach collection="array" item="bo_id" 
+		             open="bo_id IN (" 
+		             close=")"
+		             separator=","  >
+		    	#{bo_id}
+		    </foreach>
+			</otherwise>
+		</choose>
+		   
+	</delete>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
