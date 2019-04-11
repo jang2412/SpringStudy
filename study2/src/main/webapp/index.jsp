@@ -15,5 +15,12 @@
 <a href="<c:url value="/board/list.do" />">게시판 목록</a><br>
 <hr>
 <a href="<c:url value="/admin/member/list.do" />">관리자 회원 목록</a>
+<div class="container">
+<p>
+	<a href="regist.do" >
+	<button type="button" class="btn btn-success">회원가입</button>
+	</a>
+</p>
+</div>
 </body>
 </html>

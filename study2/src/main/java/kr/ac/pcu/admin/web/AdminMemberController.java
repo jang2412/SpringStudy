@@ -2,12 +2,15 @@ package kr.ac.pcu.admin.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,9 +62,9 @@ public class AdminMemberController {
 		}
 		
 		
-		// 사용자 등록을 위해서 입력화면처 입력처리에 대한 2가지를 기술하는 데
-		// 
-		
+		// 사용자 등록을 위해서 입력처리에 대한 2가지를 사용
+		// 방법 1.	등록화면 : regist.do, 등록처리 registProc.do
+		// 방법 2.	등록화면 : regist.do(GET), 등록처리 registProc.do(POST)
 		@RequestMapping(value="/admin/member/regist.do", method=RequestMethod.GET)
 		public String memberRegist() throws Exception {
 			
@@ -70,7 +73,13 @@ public class AdminMemberController {
 		}
 		
 		@RequestMapping(value="/admin/member/regist.do", method=RequestMethod.POST)
-		public String memberRegist(Member member) throws Exception {
+		public String memberRegist(@Valid Member member, Errors errors) throws Exception {
+			//	검증
+			if(errors.hasErrors()) {
+				return "admin/member/regist";
+			}
+			
+			
 			memberService.registMember(member);
 			// 등록에 성공했는데... 결과에 대한 처리는 ??		
 			return "redirect:/admin/member/list.do";

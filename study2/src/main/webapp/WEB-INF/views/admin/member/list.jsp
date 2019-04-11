@@ -16,6 +16,12 @@
 </head>
 <body>
 <div class="container">
+<p>
+	<a href="regist.do" >
+	<button type="button" class="btn btn-success">회원가입</button>
+	</a>
+</p>
+
 <table class="table table-striped">
 <thread>
 <tr>
