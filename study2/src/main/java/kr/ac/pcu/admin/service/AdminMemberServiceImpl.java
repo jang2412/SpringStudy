@@ -45,5 +45,11 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		//	수정(update)을 했는데.... 영향받은 행수가 0이면??
 		return (ret > 0 ? true : false);
 	}
+	
+	@Override
+	public Member getLoginCheck(Member member) throws Exception {
+		Member r = memberMapper.selectMemberLogin(member);
+		return r;
+	}
 
 }

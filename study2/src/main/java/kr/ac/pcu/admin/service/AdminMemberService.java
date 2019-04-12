@@ -37,5 +37,7 @@ public interface AdminMemberService {
 	 * @throws Exception
 	 */
 	boolean modifyMember(Member member) throws Exception;
+	
+	Member getLoginCheck(Member member) throws Exception;
 
 }

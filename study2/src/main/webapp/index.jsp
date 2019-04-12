@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>/index.jsp</title>
 </head>
 <body>
-<!-- 위에 꺼 두개는 동작안함 -->
-<a href="/board/list.do">게시판 목록</a><br>
-<a href="/pcu/board/list.do">게시판 목록</a><br>
+<%@ include file="/WEB-INF/views/inc/top.jsp" %>
+
 <a href="${pageContext.request.contextPath}/board/list.do">게시판 목록</a><br>
 <a href="<c:url value="/board/list.do" />">게시판 목록</a><br>
 <hr>

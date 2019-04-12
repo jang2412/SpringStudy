@@ -15,6 +15,8 @@
 <%@include file="/WEB-INF/views/inc/include.jsp" %>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/inc/top.jsp" %>
+
 <div class="container">
 <div class="page-header">
 <h1>회 원 등 록</h1>

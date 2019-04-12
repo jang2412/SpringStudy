@@ -21,7 +21,6 @@ public class Member {
 	private String name="";
 	
 	private int point;
-	
 	@Pattern(regexp="\\d{4}-\\d{2}-\\d{2}", message="생년월일은 yyyy-mm-dd 형식입니다.")
 	private String birth="";
 	
@@ -29,6 +28,10 @@ public class Member {
 	private String address="";
 	private String localeCd="";
 	private String regDate="";
+	
+	@NotBlank(message="비밀번호는 필수입니다.")
+	@Size(min=4, max=20, message="비밀번호는 4글자 이상 20글자 이하입니다.")
+	private String password="";
 	
 	
 	public String getId() {
@@ -78,5 +81,11 @@ public class Member {
 	}
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -39,8 +39,16 @@
 			address = #{address},
 			locale_cd = #{localeCd}
 			WHERE id = #{id}
-			
 	</update>
+	
+	<select id="selectMemberLogin"
+			parameterType="kr.ac.pcu.admin.web.Member"
+			resultType="kr.ac.pcu.admin.web.Member">
+			SELECT *
+			FROM tb_member
+			WHERE id = #{id}
+			AND password = PASSWORD(#{password});
+	</select>
 
 </mapper>
 

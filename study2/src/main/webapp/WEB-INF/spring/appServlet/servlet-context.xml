@@ -66,6 +66,15 @@
     	<beans:constructor-arg ref="sqlSessionFactoryBean" />
 	</beans:bean>
 	
+	<!-- 인터셉터 추가 -->    
+	<interceptors>
+
+    <interceptor>
+        <mapping path="/**" />
+        <beans:bean class="kr.ac.pcu.common.interceptor.ProfileInterceptor" />
+    </interceptor>
+
+	</interceptors>
 	
 	
 </beans:beans>

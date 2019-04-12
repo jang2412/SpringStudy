@@ -40,4 +40,7 @@ public interface MemberMapper {
 	 */
 	int updateMember(Member member) throws Exception;
 
+	//	로그인 체크해서 결과정보 리턴
+	Member selectMemberLogin(Member member) throws Exception;
+
 }

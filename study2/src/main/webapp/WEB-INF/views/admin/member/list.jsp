@@ -15,6 +15,7 @@
 <%@include file="/WEB-INF/views/inc/include.jsp" %>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/inc/top.jsp" %>
 <div class="container">
 <p>
 	<a href="regist.do" >

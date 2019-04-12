@@ -85,7 +85,7 @@ public class AdminMemberController {
 			return "redirect:/admin/member/list.do";
 		}
 	
-		/*	4월 9일자 강의 내용
+	/*	4월 9일자 강의 내용
 	//	현재 등록된 빈 중에 타입, 이름으로 생성된 객체를 의존객체 주입(의존 주입)
 	@Autowired
 	private MemberMapper memberDao;
